@@ -12,7 +12,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get install -y --no-install-recommends \
         python3.12 python3.12-venv python3.12-dev \
         python3-pip \
-        curl ffmpeg ninja-build git git-lfs wget vim \
+        curl ffmpeg ninja-build git aria2 git-lfs wget vim \
         libgl1 libglib2.0-0 build-essential gcc && \
     \
     # make Python3.12 the default python & pip
@@ -71,10 +71,16 @@ RUN for repo in \
     https://github.com/chrisgoringe/cg-image-picker.git \
     https://github.com/chflame163/ComfyUI_LayerStyle.git \
     https://github.com/chrisgoringe/cg-use-everywhere.git \
+    https://github.com/kijai/ComfyUI-segment-anything-2.git \
+    https://github.com/ClownsharkBatwing/RES4LYF \
     https://github.com/welltop-cn/ComfyUI-TeaCache.git \
     https://github.com/Fannovel16/ComfyUI-Frame-Interpolation.git \
     https://github.com/Jonseed/ComfyUI-Detail-Daemon.git \
     https://github.com/kijai/ComfyUI-WanVideoWrapper.git \
+    https://github.com/chflame163/ComfyUI_LayerStyle_Advance.git \
+    https://github.com/BadCafeCode/masquerade-nodes-comfyui.git \
+    https://github.com/1038lab/ComfyUI-RMBG.git \
+    https://github.com/KBYSHanahira/Civicomfy.git \
     https://github.com/M1kep/ComfyLiterals.git; \
     do \
         cd /ComfyUI/custom_nodes; \
@@ -91,10 +97,6 @@ RUN for repo in \
             python "/ComfyUI/custom_nodes/$repo_dir/install.py"; \
         fi; \
     done
-
-
-COPY sageattention-2.1.1-cp312-cp312-linux_x86_64.whl /tmp/
-RUN pip install /tmp/sageattention-2.1.1-cp312-cp312-linux_x86_64.whl
 
 COPY src/start_script.sh /start_script.sh
 RUN chmod +x /start_script.sh
